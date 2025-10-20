@@ -19,6 +19,9 @@ const paginaGerada = document.getElementById("paginaGerada");
 const areaCards = document.getElementById("areaCards");
 const codigoGerado = document.getElementById("codigoGerado");
 
+for (let i = 0; i < 3; i++) {
+  adicionarCard();
+}
 // ======== FUNÇÕES DE EDIÇÃO =========
 function atualizarPagina() {
   // Cabeçalho com imagem local ou URL
