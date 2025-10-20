@@ -1,4 +1,4 @@
-// ======== VARIÁVEIS PRINCIPAIS =========
+
 let listaCards = [];
 let imagemCabecalhoBase64 = "";
 
@@ -20,9 +20,9 @@ const areaCards = document.getElementById("areaCards");
 const codigoGerado = document.getElementById("codigoGerado");
 
 
-// ======== FUNÇÕES DE EDIÇÃO =========
+
 function atualizarPagina() {
-  // Cabeçalho com imagem local ou URL
+  
   let imagemTag = "";
   if (imagemCabecalhoBase64) {
     imagemTag = `<img src='${imagemCabecalhoBase64}' style='height:80px;'>`;
@@ -37,7 +37,7 @@ function atualizarPagina() {
     </header>
   `;
 
-  // Cards de notícias
+  
   let cardsHTML = "<section style='padding:10px;'>";
   listaCards.forEach(c => {
     cardsHTML += `
@@ -50,7 +50,7 @@ function atualizarPagina() {
   });
   cardsHTML += "</section>";
 
-  // Rodapé
+ 
   let rodape = `
     <footer style="background:${corFundoRodape.value}; color:${corTextoRodape.value}; text-align:center; padding:10px;">
       ${textoRodape.value}
@@ -62,11 +62,11 @@ function atualizarPagina() {
   codigoGerado.value = pagina;
 }
 
-// ======== FUNÇÕES DE CARDS =========
+
 function adicionarCard() {
   if (listaCards.length >= 30) return alert("Máximo de 30 cards!");
 
-  // gera uma imagem aleatória diferente a cada vez
+  
   const seed = Math.floor(Math.random() * 10000);
   const imagemAleatoria = `https://picsum.photos/400/200?random=${seed}`;
 
@@ -108,7 +108,7 @@ function editarCard(indice, campo, valor) {
   atualizarPagina();
 }
 
-// ======== FUNÇÕES DE LOCALSTORAGE =========
+
 function salvarPagina() {
   let codigoCompleto =
     `<!DOCTYPE html><html lang='pt-br'><head><meta charset='UTF-8'><title>Página Gerada</title></head><body>` +
@@ -129,7 +129,7 @@ function limparLocal() {
   alert("LocalStorage limpo!");
 }
 
-// ======== EVENTOS =========
+
 document.getElementById("adicionarCard").onclick = adicionarCard;
 document.getElementById("removerCard").onclick = removerCard;
 document.getElementById("salvarPagina").onclick = salvarPagina;
@@ -140,7 +140,7 @@ document.querySelectorAll("input, textarea").forEach(el => {
   el.addEventListener("input", atualizarPagina);
 });
 
-// Upload de imagem local para o cabeçalho
+
 arquivoCabecalho.addEventListener("change", function () {
   const arquivo = this.files[0];
   if (!arquivo) return;
@@ -148,10 +148,10 @@ arquivoCabecalho.addEventListener("change", function () {
   const leitor = new FileReader();
   leitor.onload = function (e) {
     imagemCabecalhoBase64 = e.target.result;
-    atualizarPagina(); // força atualização imediata
+    atualizarPagina(); 
   };
   leitor.readAsDataURL(arquivo);
 });
 
-// Inicia com a página vazia
+
 atualizarPagina();
