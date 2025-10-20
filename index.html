@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Páginas - Cards de Notícia</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div id="editor">
+    <h1>Editor de Página HTML</h1>
+
+    <section>
+      <h2>Cabeçalho</h2>
+      <label>Texto do Cabeçalho:</label>
+      <input type="text" id="textoCabecalho" placeholder="Digite o título"><br>
+
+      <label>Imagem do Cabeçalho (URL):</label>
+      <input type="text" id="imagemCabecalho" placeholder="https://..."><br>
+
+      <label>Cor de Fundo:</label>
+      <input type="color" id="corFundoCabecalho" value="#ffffff">
+
+      <label>Cor do Texto:</label>
+      <input type="color" id="corTextoCabecalho" value="#000000"><br><br>
+    </section>
+
+    <section>
+      <h2>Cards de Notícias</h2>
+      <button id="adicionarCard">Adicionar Card</button>
+      <button id="removerCard">Remover Último Card</button>
+
+      <div id="areaCards"></div>
+
+      <br>
+      <label>Cor de Fundo dos Cards:</label>
+      <input type="color" id="corFundoCards" value="#eeeeee">
+
+      <label>Cor do Texto:</label>
+      <input type="color" id="corTextoCards" value="#000000">
+    </section>
+
+    <section>
+      <h2>Rodapé</h2>
+      <label>Texto do Rodapé:</label>
+      <input type="text" id="textoRodape" value="© 2025 - Meu Site"><br>
+
+      <label>Cor de Fundo:</label>
+      <input type="color" id="corFundoRodape" value="#333333">
+
+      <label>Cor do Texto:</label>
+      <input type="color" id="corTextoRodape" value="#ffffff">
+    </section>
+
+    <section>
+      <h2>Controles</h2>
+      <button id="salvarPagina">Salvar Página</button>
+      <button id="mostrarPaginaSalva">Mostrar Página Salva</button>
+      <button id="limparLocal">Limpar LocalStorage</button>
+    </section>
+
+    <textarea id="codigoGerado" rows="6" readonly></textarea>
+  </div>
+
+  <div id="visualizacao">
+    <h2>Visualização da Página</h2>
+    <div id="paginaGerada"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
