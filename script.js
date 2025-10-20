@@ -19,9 +19,7 @@ const paginaGerada = document.getElementById("paginaGerada");
 const areaCards = document.getElementById("areaCards");
 const codigoGerado = document.getElementById("codigoGerado");
 
-for (let i = 0; i < 3; i++) {
-  adicionarCard();
-}
+
 // ======== FUNÇÕES DE EDIÇÃO =========
 function atualizarPagina() {
   // Cabeçalho com imagem local ou URL
@@ -150,7 +148,7 @@ arquivoCabecalho.addEventListener("change", function () {
   const leitor = new FileReader();
   leitor.onload = function (e) {
     imagemCabecalhoBase64 = e.target.result;
-    atualizarPagina();
+    atualizarPagina(); // força atualização imediata
   };
   leitor.readAsDataURL(arquivo);
 });
