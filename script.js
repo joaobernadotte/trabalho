@@ -109,32 +109,8 @@ function editarCard(indice, campo, valor) {
 }
 
 
-function salvarPagina() {
-  let codigoCompleto =
-    `<!DOCTYPE html><html lang='pt-br'><head><meta charset='UTF-8'><title>Página Gerada</title></head><body>` +
-    codigoGerado.value +
-    `</body></html>`;
-  localStorage.setItem("paginaGerada", codigoCompleto);
-  alert("Página salva no localStorage!");
-}
-
-function mostrarPaginaSalva() {
-  let codigo = localStorage.getItem("paginaGerada");
-  if (!codigo) return alert("Nenhuma página salva!");
-  codigoGerado.value = codigo;
-}
-
-function limparLocal() {
-  localStorage.removeItem("paginaGerada");
-  alert("LocalStorage limpo!");
-}
-
-
 document.getElementById("adicionarCard").onclick = adicionarCard;
 document.getElementById("removerCard").onclick = removerCard;
-document.getElementById("salvarPagina").onclick = salvarPagina;
-document.getElementById("mostrarPaginaSalva").onclick = mostrarPaginaSalva;
-document.getElementById("limparLocal").onclick = limparLocal;
 
 document.querySelectorAll("input, textarea").forEach(el => {
   el.addEventListener("input", atualizarPagina);
