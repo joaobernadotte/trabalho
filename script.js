@@ -1,8 +1,10 @@
 // ======== VARIÁVEIS PRINCIPAIS =========
 let listaCards = [];
+let imagemCabecalhoBase64 = "";
 
 const textoCabecalho = document.getElementById("textoCabecalho");
 const imagemCabecalho = document.getElementById("imagemCabecalho");
+const arquivoCabecalho = document.getElementById("arquivoCabecalho");
 const corFundoCabecalho = document.getElementById("corFundoCabecalho");
 const corTextoCabecalho = document.getElementById("corTextoCabecalho");
 
@@ -19,13 +21,22 @@ const codigoGerado = document.getElementById("codigoGerado");
 
 // ======== FUNÇÕES DE EDIÇÃO =========
 function atualizarPagina() {
+  // Cabeçalho com imagem local ou URL
+  let imagemTag = "";
+  if (imagemCabecalhoBase64) {
+    imagemTag = `<img src='${imagemCabecalhoBase64}' style='height:80px;'>`;
+  } else if (imagemCabecalho.value) {
+    imagemTag = `<img src='${imagemCabecalho.value}' style='height:80px;'>`;
+  }
+
   let cabecalho = `
     <header style="background:${corFundoCabecalho.value}; color:${corTextoCabecalho.value}; padding:10px;">
-      ${imagemCabecalho.value ? `<img src='${imagemCabecalho.value}' style='height:80px;'>` : ""}
+      ${imagemTag}
       <h1>${textoCabecalho.value}</h1>
     </header>
   `;
 
+  // Cards de notícias
   let cardsHTML = "<section style='padding:10px;'>";
   listaCards.forEach(c => {
     cardsHTML += `
@@ -38,6 +49,7 @@ function atualizarPagina() {
   });
   cardsHTML += "</section>";
 
+  // Rodapé
   let rodape = `
     <footer style="background:${corFundoRodape.value}; color:${corTextoRodape.value}; text-align:center; padding:10px;">
       ${textoRodape.value}
@@ -52,7 +64,16 @@ function atualizarPagina() {
 // ======== FUNÇÕES DE CARDS =========
 function adicionarCard() {
   if (listaCards.length >= 30) return alert("Máximo de 30 cards!");
-  let novoCard = { imagem: "", titulo: "Título da Notícia", texto: "Texto da notícia..." };
+
+  // gera uma imagem aleatória diferente a cada vez
+  const seed = Math.floor(Math.random() * 10000);
+  const imagemAleatoria = `https://picsum.photos/400/200?random=${seed}`;
+
+  let novoCard = {
+    imagem: imagemAleatoria,
+    titulo: "Título da Notícia " + (listaCards.length + 1),
+    texto: "Texto exemplo da notícia gerada automaticamente."
+  };
   listaCards.push(novoCard);
   mostrarCards();
   atualizarPagina();
@@ -116,6 +137,19 @@ document.getElementById("limparLocal").onclick = limparLocal;
 
 document.querySelectorAll("input, textarea").forEach(el => {
   el.addEventListener("input", atualizarPagina);
+});
+
+// Upload de imagem local para o cabeçalho
+arquivoCabecalho.addEventListener("change", function () {
+  const arquivo = this.files[0];
+  if (!arquivo) return;
+
+  const leitor = new FileReader();
+  leitor.onload = function (e) {
+    imagemCabecalhoBase64 = e.target.result;
+    atualizarPagina();
+  };
+  leitor.readAsDataURL(arquivo);
 });
 
 // Inicia com a página vazia
